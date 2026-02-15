@@ -1,0 +1,44 @@
+## Paper2Notebook — Pipeline configuration
+## Uses NVIDIA NeMo Agent Toolkit + NIM for all agentic workflows
+
+models:
+  orchestrator: "nvidia/llama-3.3-nemotron-super-49b-v1"
+  sub_agent: "nvidia/nvidia-nemotron-nano-9b-v2"
+  vision: "nvidia/nemotron-nano-12b-v2-vl"
+  base_url: "https://integrate.api.nvidia.com/v1"
+
+pipeline:
+  skip_vision: false
+  skip_debug: false
+  skip_repo_search: false
+  max_retries: 2
+
+notebook:
+  kernel: "python3"
+  language: "python"
+  max_cells: 50
+  include_explanations: true
+  include_setup_cell: true
+
+pdf:
+  use_ocr: true
+  ocr_language: "eng"
+  embed_images: true
+  vision_jpeg_quality: 75
+
+remove_sections:
+  - "references"
+  - "reference"
+  - "acknowledgements"
+  - "acknowledgement"
+  - "acknowledgments"
+  - "acknowledgment"
+  - "authors"
+  - "author"
+  - "broader impact"
+  - "ethics statement"
+
+logging:
+  level: "INFO"
+  save_artifacts: true
+  save_cost_log: true

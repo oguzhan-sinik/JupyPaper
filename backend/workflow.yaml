@@ -1,0 +1,79 @@
+## NeMo Agent Toolkit workflow configuration for Paper2Notebook
+## Defines ReAct agent, tools, LLMs, and Arize Phoenix observability
+
+general:
+  telemetry:
+    tracing:
+      phoenix:
+        _type: phoenix
+        endpoint: http://localhost:6006/v1/traces
+        project: paper2notebook
+
+llms:
+  orchestrator_llm:
+    _type: nim
+    model_name: nvidia/llama-3.3-nemotron-super-49b-v1.5
+    temperature: 0.2
+    max_tokens: 4096
+
+  sub_agent_llm:
+    _type: nim
+    model_name: nvidia/nvidia-nemotron-nano-9b-v2
+    temperature: 0.2
+    max_tokens: 3072
+
+  vision_llm:
+    _type: nim
+    model_name: nvidia/nemotron-nano-12b-v2-vl
+    temperature: 0.2
+    max_tokens: 512
+
+functions:
+  # Custom tools registered as NeMo Agent Toolkit functions
+  paper_analyzer:
+    _type: paper_analyzer
+    description: "Analyze a research paper and extract structured summary"
+    llm_name: orchestrator_llm
+
+  repo_searcher:
+    _type: repo_searcher
+    description: "Search for and scrape existing code repositories for a paper"
+
+  config_extractor:
+    _type: config_extractor
+    description: "Extract hyperparameters and configuration from the paper"
+    llm_name: sub_agent_llm
+
+  notebook_architect:
+    _type: notebook_architect
+    description: "Design the Jupyter notebook cell structure"
+    llm_name: orchestrator_llm
+
+  cell_analyzer:
+    _type: cell_analyzer
+    description: "Produce detailed implementation logic for a notebook cell"
+    llm_name: sub_agent_llm
+
+  cell_writer:
+    _type: cell_writer
+    description: "Generate code or markdown for a notebook cell"
+    llm_name: orchestrator_llm
+
+  notebook_debugger:
+    _type: notebook_debugger
+    description: "Validate and fix issues in the generated notebook"
+    llm_name: orchestrator_llm
+
+workflow:
+  _type: react_agent
+  tool_names:
+    - paper_analyzer
+    - repo_searcher
+    - config_extractor
+    - notebook_architect
+    - cell_analyzer
+    - cell_writer
+    - notebook_debugger
+  llm_name: orchestrator_llm
+  verbose: true
+  parse_agent_response_max_retries: 3

@@ -1,0 +1,44 @@
+appId: com.jupypaper.app
+productName: JupyPaper
+copyright: Copyright © 2025
+
+directories:
+  output: release
+
+files:
+  - dist/**/*
+  - electron/**/*
+
+extraResources:
+  - from: backend
+    to: backend
+    filter:
+      - "**/*.py"
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.txt"
+  - from: .next/standalone
+    to: app
+  - from: .next/static
+    to: app/.next/static
+  - from: public
+    to: app/public
+
+mac:
+  target:
+    - dmg
+    - zip
+  icon: public/icon.icns
+  category: public.app-category.developer-tools
+
+win:
+  target:
+    - nsis
+  icon: public/icon.ico
+
+linux:
+  target:
+    - AppImage
+    - deb
+  icon: public/icon.png
+  category: Development

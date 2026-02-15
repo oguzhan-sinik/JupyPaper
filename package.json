@@ -1,26 +1,35 @@
 {
-  "name": "pdf2jupyternotebook",
-  "version": "0.1.0",
-  "private": true,
+  "name": "jupypaper",
+  "version": "1.0.0",
+  "description": "Transform research papers into executable Jupyter notebooks — powered by NVIDIA NIM",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "electron:dev": "npx concurrently \"next dev\" \"npx wait-on http://localhost:3000 && NODE_ENV=development npx electron .\"",
+    "electron:build": "next build && npx electron-builder --config electron-builder.yml"
   },
   "dependencies": {
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "next": "15.3.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "15.3.3",
+    "postcss": "^8",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^7.2.0"
   }
 }
