@@ -37,6 +37,12 @@ Upload any deep learning research paper (e.g., *Attention Is All You Need*, *BER
 
 ---
 
+### Want to see example results?
+
+Check the folder example/, the file called input.pdf (which is actually the famous paper "Attention Is All You Need") is the file given for our app, and the result is output.ipynb.
+
+---
+
 ## Architecture
 
 ```
