@@ -11,7 +11,7 @@
 
 ---
 
-> **🏆 Built for the [NVIDIA GTC 2025 Golden Ticket Contest](https://developer.nvidia.com/gtc-golden-ticket-contest)**
+> **🏆 Built for the [NVIDIA GTC 2026 Golden Ticket Contest](https://developer.nvidia.com/gtc-golden-ticket-contest)**
 >
 > This project was developed as a submission to NVIDIA's GTC Golden Ticket Contest, showcasing the power of NVIDIA NIM microservices for agentic AI workflows in scientific research and education.
 
@@ -393,8 +393,3 @@ Built with NVIDIA's AI infrastructure:
 - [NVIDIA NeMo Data Designer](https://docs.nvidia.com/nemo/microservices/latest/design-synthetic-data-from-scratch-or-seeds/) — Synthetic data generation
 - [LangChain ChatNVIDIA](https://python.langchain.com/docs/integrations/chat/nvidia_ai_endpoints/) — LangChain + NIM integration
 
----
-
-## License
-
-MIT
