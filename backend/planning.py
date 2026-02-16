@@ -121,7 +121,7 @@ def run_planning(orchestrator: Orchestrator, paper_md: str, output_dir: str) -> 
         config = {"training": {}, "model": {}, "data": {}, "evaluation": {}, "other": {}}
 
     # Determine data strategy
-    datasets = analysis.get("datasets", [])
+    datasets = analysis.get("datasets") or []
     has_public_dataset = bool(datasets and any(
         (d.get("url_or_source") and d.get("url_or_source") != "not provided"
          and d.get("is_public", False))
@@ -204,9 +204,10 @@ def _plan_synthetic_data(analysis: dict, config: dict) -> dict:
       - Generate data inline in the notebook (simple approach)
       - Call NVIDIA NeMo Data Designer API (advanced approach)
     """
-    datasets = analysis.get("datasets", [])
-    data_config = config.get("data", {})
-    model_config = config.get("model", {})
+    # Guard against None values returned by NIM structured outputs
+    datasets = analysis.get("datasets") or []
+    data_config = config.get("data") or {}
+    model_config = config.get("model") or {}
 
     plan = {
         "approach": "inline_synthetic",  # or "nemo_data_designer"
@@ -220,8 +221,9 @@ def _plan_synthetic_data(analysis: dict, config: dict) -> dict:
         "columns": [],
     }
 
-    # Infer data structure from paper
-    arch_type = model_config.get("architecture", "").lower()
+    # Infer data structure from paper — guard against None architecture
+    arch_type = (model_config.get("architecture") or "").lower()
+
     if any(k in arch_type for k in ["transformer", "seq2seq", "translation", "language"]):
         plan["data_type"] = "sequence_pair"
         plan["columns"] = [
@@ -252,8 +254,7 @@ def _plan_synthetic_data(analysis: dict, config: dict) -> dict:
 def _default_structure(analysis: dict, has_dataset: bool, repo_info: dict) -> dict:
     """Generate a rich default notebook structure when NIM fails to produce JSON."""
     t = analysis.get("title", "Paper Reproduction")
-    methodology = analysis.get("methodology", "")
-    key_components = analysis.get("key_components", [])
+    key_components = analysis.get("key_components") or []
 
     cells = [
         # Introduction
@@ -340,6 +341,6 @@ def _default_structure(analysis: dict, has_dataset: bool, repo_info: dict) -> di
         "notebook_title": t,
         "notebook_description": f"Educational Jupyter notebook reproducing: {t}",
         "cells": cells,
-        "estimated_packages": analysis.get("dependencies", ["torch", "numpy", "matplotlib", "tqdm"]),
+        "estimated_packages": analysis.get("dependencies") or ["torch", "numpy", "matplotlib", "tqdm"],
         "generation_order": [c["cell_id"] for c in cells],
     }

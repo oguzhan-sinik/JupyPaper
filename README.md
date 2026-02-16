@@ -390,6 +390,15 @@ python main.py --pdf /path/to/paper.pdf --output ./output
 
 ---
 
+## Project Roadmap -- 16 Feb 2026
+
+- [ ] Better Notebook Preview
+- [ ] DB for saving works
+- [ ] UI improvements for continous usage
+- [ ] Publishing this app in production.
+
+---
+
 ## Acknowledgements
 
 Built with NVIDIA's AI infrastructure:
