@@ -19,7 +19,7 @@ export default function Home() {
 
   // ── Poll Python backend health ────────────────────────────────────────
   useEffect(() => {
-    if (window.electronAPI) {
+    if (typeof window !== 'undefined' && window.electronAPI) {
       window.electronAPI.onPythonReady(() => setServerReady(true));
     }
     const poll = setInterval(async () => {

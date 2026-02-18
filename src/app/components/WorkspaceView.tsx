@@ -69,7 +69,7 @@ export default function WorkspaceView({ session, setSession, apiBase, onNewPipel
 
   // ── Save ──────────────────────────────────────────────────────────────
   const handleSave = async () => {
-    if (window.electronAPI) {
+    if (typeof window !== 'undefined' && window.electronAPI) {
       await window.electronAPI.saveNotebook(session.id);
     } else {
       const a = document.createElement("a");

@@ -49,7 +49,7 @@ export default function SettingsModal({ apiBase, keys, onClose, onSaved }: Props
   };
 
   const openLink = (url: string) => {
-    if (window.electronAPI) {
+    if (typeof window !== 'undefined' && window.electronAPI) {
       window.electronAPI.openExternal(url);
     } else {
       window.open(url, "_blank");
