@@ -12,7 +12,7 @@
     "electron:build": "next build && npx electron-builder --config electron-builder.yml"
   },
   "dependencies": {
-    "next": "15.3.3",
+    "next": "15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-jupyter-notebook": "^0.4.0"
