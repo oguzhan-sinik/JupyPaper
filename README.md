@@ -246,8 +246,8 @@ This prevents context rot and ensures the model focuses on the most relevant inf
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/paper2notebook.git
-cd paper2notebook
+git clone https://github.com/oguzhan-sinik/JupyPaper
+cd JupyPaper
 
 # Install Node.js dependencies
 npm install
