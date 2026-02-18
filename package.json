@@ -8,13 +8,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "electron:dev": "npx concurrently \"next dev\" \"npx wait-on http://localhost:3000 && NODE_ENV=development npx electron .\"",
+   "electron:dev": "npx concurrently \"next dev --turbopack\" \"npx wait-on http://localhost:3000 && NODE_ENV=development npx electron .\"",
     "electron:build": "next build && npx electron-builder --config electron-builder.yml"
   },
   "dependencies": {
     "next": "15.3.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-jupyter-notebook": "^0.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
